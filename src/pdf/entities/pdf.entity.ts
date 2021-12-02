@@ -16,6 +16,12 @@ export class Pdf {
 
   @Prop()
   bufferPdf: Buffer;
+
+  @Prop()
+  created_at: Date;
+
+  @Prop()
+  updated_at: Date;
 }
 
 export const PdfSchema = SchemaFactory.createForClass(Pdf);

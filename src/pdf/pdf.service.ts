@@ -1,3 +1,4 @@
+import { Readable } from 'stream';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -15,6 +16,8 @@ export class PdfService {
       status: 'PROCESSANDO',
       bufferHmll: file.buffer,
       protocol: randomBytes(8).toString('hex'),
+      created_at: new Date(),
+      updated_at: new Date(),
     });
     return newPdf.save();
   }
@@ -29,5 +32,14 @@ export class PdfService {
       protocol,
       bufferPdf,
     };
+  }
+
+  getReadableStream(buffer: Buffer): Readable {
+    const stream = new Readable();
+
+    stream.push(buffer);
+    stream.push(null);
+
+    return stream;
   }
 }
