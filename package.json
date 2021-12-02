@@ -25,9 +25,13 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^8.2.3",
+    "@nestjs/mongoose": "^9.0.1",
     "@nestjs/platform-express": "^8.0.0",
     "amqp-connection-manager": "^3.7.0",
     "amqplib": "^0.8.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.14",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

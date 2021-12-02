@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreatePdfDto } from './dto/create-pdf.dto';
 import { PdfService } from './pdf.service';
 
 @Controller('pdf')
@@ -21,13 +22,18 @@ export class PdfController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file) {
-    this.client.emit('pdf', file);
-    return this.pdfService.create(file);
+  async create(@UploadedFile() file: CreatePdfDto) {
+    const { status, _id, protocol } = await this.pdfService.create(file);
+    // this.client.emit('pdf', response.protocol);
+    return {
+      _id,
+      status,
+      protocol,
+    };
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pdfService.findOne(+id);
+  @Get(':protocol')
+  findOne(@Param('protocol') protocol: string) {
+    return this.pdfService.findOne(protocol);
   }
 }
